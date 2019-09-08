@@ -16,6 +16,8 @@ public class FibonacciGenerator {
 	private final String separator;
 	private static final BigInteger zerothFibonacci = new BigInteger("0");
 	private static final BigInteger onethFibonacci = new BigInteger("1");
+	private static final String RANGE_ERROR = "Please enter valid integers between 0 to 1000000 (Both Inclusive).\n";
+	
 	private PrintStream outputStream;
 
 	/**
@@ -43,7 +45,7 @@ public class FibonacciGenerator {
 	 */
 	public void printNFibonacci(int sequenceLength) throws IOException {
 		if (sequenceLength < 0 || sequenceLength > 1000000) {
-			outputStream.print("System can only generate a fibonacci series from indexes 0 to 1000000.\n");
+			outputStream.print(RANGE_ERROR);
 			return;
 		}
 

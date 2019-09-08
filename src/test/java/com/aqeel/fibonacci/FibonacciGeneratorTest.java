@@ -62,8 +62,8 @@ public class FibonacciGeneratorTest {
 	@Parameterized.Parameters
     public static Collection<Object[]> getTestData() {
         return Arrays.asList(new Object[][]{
-            {-1, "System can only generate a fibonacci series from indexes 0 to 1000000.\n"}, // Lower Limit
-            {1000001, "System can only generate a fibonacci series from indexes 0 to 1000000.\n"}, // Upper Limit
+            {-1, "Please enter valid integers between 0 to 1000000 (Both Inclusive).\n"}, // Lower Limit
+            {1000001, "Please enter valid integers between 0 to 1000000 (Both Inclusive).\n"}, // Upper Limit
             {0, "0"}, // First Fibonacci that is the 0th one
             {1, "0 1"}, // First and second Fibonacci that is the 0th and 1th one.
             {10, "0 1 1 2 3 5 8 13 21 34 55"}, // Test the generation logic that builds starts with the first two and then uses the most recent two numbers to build the next fibonacci.
