@@ -14,11 +14,18 @@ import java.math.BigInteger;
 public class FibonacciGenerator {
 
 	private final String separator;
-	private static final BigInteger zerothFibonacci = new BigInteger("0");
-	private static final BigInteger onethFibonacci = new BigInteger("1");
-	private static final String RANGE_ERROR = "Please enter valid integers between 0 to 1000000 (Both Inclusive).\n";
 	
 	private PrintStream outputStream;
+
+	/*
+	 * Below two are the 0th and 1st Fibonacci numbers. I have extracted them out to static variables inorder to specify their significance in generation of fibonacci.
+	 * These are hardcodes and form the building blocks for the series.
+	 */
+	private static final BigInteger zerothFibonacci = new BigInteger("0"); // The zeroth fibonacci number.
+	private static final BigInteger onethFibonacci = new BigInteger("1"); // The first fibonacci number.
+	
+	
+	private static final String RANGE_ERROR = "Please enter valid integers between 0 to 1000000 (Both Inclusive).\n";
 
 	/**
 	 * @param seperator
@@ -52,7 +59,7 @@ public class FibonacciGenerator {
 		// 0th fibonacci is zero
 		BigInteger nMinus2 = zerothFibonacci;
 
-		// 1th fibonacci us one
+		// 1st fibonacci us one
 		BigInteger nMinus1 = onethFibonacci;
 
 		// Print the 0th fibonacci if the required length is >= 0
