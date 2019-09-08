@@ -19,8 +19,6 @@ public class FibonacciGenerator {
 	private PrintStream outputStream;
 
 	/**
-	 * Default constructor.
-	 * 
 	 * @param seperator
 	 *            User to seperate the Fibonacci numbers when printed.
 	 * 
