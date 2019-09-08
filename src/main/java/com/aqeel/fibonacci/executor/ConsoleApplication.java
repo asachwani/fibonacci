@@ -15,35 +15,54 @@ import com.aqeel.fibonacci.FibonacciGenerator;
  */
 public class ConsoleApplication {
 
-	protected static String HELP_STRING = "Usage: \r\n"
-			+ "Start with providing a separator [Type s for 'SPACE` OR nl for `NEW LINE`]. \r\n"
+	private static final String HELP_STRING = "Usage: \r\n" //
+			+ "Start with providing a separator [Type `s` for 'SPACE` OR `nl` for `NEW LINE`]. \r\n" //
 			+ "Input an integer representing the total count of fibonacci numbers required. \r\n" //
 			+ "Allowed values are the range of 0 to 1000000 (Both Inclusive). \r\n" //
-			+ "Type \"help\" for help. \r\n"//
-			+ "Type \"exit\" to exit. \r\n";//
+			+ "Type \"help\" for help. \r\n" //
+			+ "Type \"exit\" to exit. \r\n"; //
+
+	private static final String SEPERATOR_PROMPT = "Enter Separator [Type `s` for 'SPACE` OR `nl` for `NEW LINE`]: ";
+	private static final String INPUT_PROMPT = "Enter count of fibonacci series: ";
+	private static final String NUMBER_FORMAT_ERROR = "Please enter valid integers between 0 to 1000000 (Both Inclusive).";
 
 	public static void main(String[] args) {
+		start();
+	}
 
+	/**
+	 * Starts the execution of this application from CommandLine.
+	 */
+	private static void start() {
 		System.out.println("Starting Fibonacci Series Generator.");
 		System.out.println(HELP_STRING);
 
 		try (Reader in = new InputStreamReader(System.in); BufferedReader reader = new BufferedReader(in)) {
 
-			String lineValue = readSeparator(reader);
+			// Read the separator.
+			String separator = readSeparator(reader);
+
+			if (separator == null) {
+				return;
+			}
 
 			// Initiate using the System.out stream. Used for console output.
-			FibonacciGenerator instance = new FibonacciGenerator(lineValue, System.out);
+			FibonacciGenerator instance = new FibonacciGenerator(separator, System.out);
 
 			while (true) {
-				System.out.print("Enter count of fibonacci series: ");
-				// Read from console. This method will wait while the user
-				// inputs data and presses enter.
-				lineValue = reader.readLine();
+				System.out.print(INPUT_PROMPT);
 
+				// Read user input from console. This method will wait while the
+				// user
+				// inputs data and presses enter.
+				String lineValue = reader.readLine();
+
+				// Check if termination is requested.
 				if (processTerminationRequest(lineValue)) {
 					break;
 				}
 
+				// Check if help is requested.
 				if (processHelpRequest(lineValue)) {
 					continue;
 				}
@@ -51,7 +70,7 @@ public class ConsoleApplication {
 				try {
 					instance.printNFibonacci(Integer.valueOf(lineValue));
 				} catch (NumberFormatException e) {
-					System.out.println("Please enter valid integers between 0 to 1000000 (Both Inclusive).");
+					System.out.println(NUMBER_FORMAT_ERROR);
 				}
 
 				System.out.println(" ");
@@ -60,6 +79,7 @@ public class ConsoleApplication {
 		} catch (IOException e) {
 			System.out.println("Unable to read input from command line. Error: " + e.getMessage());
 		}
+
 	}
 
 	/**
@@ -75,7 +95,8 @@ public class ConsoleApplication {
 
 		String separator = null;
 		while (separator == null) {
-			System.out.print("Enter Separator [Type s for 'SPACE` OR nl for `NEW LINE`]: ");
+			System.out.print(SEPERATOR_PROMPT);
+
 			String lineValue = reader.readLine();
 
 			if (processTerminationRequest(lineValue)) {
